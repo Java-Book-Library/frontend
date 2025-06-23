@@ -64,7 +64,7 @@ function DeleteBook() {
   else if (error) {
     return (
       <div className="card">
-        <h3>Not Found</h3>
+        <h3>{error}</h3>
       </div>
     )
   }

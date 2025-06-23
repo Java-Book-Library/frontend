@@ -3,6 +3,7 @@ import AllBooks from './components/GetAllBooks'
 import GetBook from './components/GetBook'
 import PostBook from './components/PostBook'
 import DeleteBook from './components/DeleteBook'
+import DeleteAllBooks from './components/DeleteAllBooks'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <GetBook />
       <PostBook />
       <DeleteBook />
+      <DeleteAllBooks />
     </>
   )
 }
