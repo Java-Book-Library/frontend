@@ -48,6 +48,22 @@ class BookService {
     }
   }
   
+  static async deleteBookById(id) {
+    const url = "http://localhost:8080/api/books/" + id;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE"
+      });
+      if (response.status === 204) {
+        return true;
+      }
+      throw new Error(`Response status: ${response.status}`);
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  }
+
 }
 
 export default BookService;
