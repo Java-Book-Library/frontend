@@ -70,11 +70,13 @@ function HideBook({ newBook, setNewBook, onPost }) {
 function PostBook() {
   const [newBook, setNewBook] = useState({ title: "", author: "", price: "" });
   const [createdBook, setCreatedBook] = useState(null);
+  const [created, setCreated] = useState(false);
 
   const handlePost = async () => {
     if (newBook) {
       const foundBook = await BookService.addBook(newBook);
       setCreatedBook(foundBook);
+      setCreated(true);
     }
   };
 
@@ -82,7 +84,15 @@ function PostBook() {
     return (
       <ShowBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
     )
-  } else {
+  } 
+  else if (created) {
+    return (
+      <div className="card">
+        <h3>Not Found</h3>
+      </div>
+    )
+  }
+  else {
     return (
       <HideBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
     )
