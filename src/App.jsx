@@ -95,16 +95,25 @@ function ShowBook({ book, setId, onSearch }) {
 function GetBook() {
   const [id, setId] = useState('');
   const [book, setBook] = useState(null);
+  const [searched, setSearched] = useState(false);
 
   const handleSearch = async () => {
     if (id) {
       const foundBook = await getBookById(id);
       setBook(foundBook);
+      setSearched(true);
     }
   };
 
   if (book) {
     return <ShowBook book={book} setId={setId} onSearch={handleSearch} />;
+  } 
+  else if (searched) {
+    return (
+      <div className="card">
+        <h3>Not Found</h3>
+      </div>
+    )
   }
   return <HideBook setId={setId} onSearch={handleSearch} />;
 }
