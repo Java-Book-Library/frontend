@@ -41,7 +41,7 @@ function PostBookForm({ newBook, setNewBook, onPost }) {
   )
 }
 
-function ShowBook({ newBook, setNewBook, onPost }) {
+function ShowBook({ newBook, createdBook, setNewBook, onPost }) {
   return (
     <div className="card">
       <h2>Create a book:</h2>
@@ -82,7 +82,7 @@ function PostBook() {
 
   if (createdBook) {
     return (
-      <ShowBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
+      <ShowBook newBook={newBook} createdBook={createdBook} setNewBook={setNewBook} onPost={handlePost} />
     )
   } 
   else if (created) {
