@@ -74,6 +74,8 @@ function PostBook() {
 
   const handlePost = async () => {
     if (newBook) {
+      setCreatedBook(null);
+      setCreated(false);
       const foundBook = await BookService.addBook(newBook);
       setCreatedBook(foundBook);
       setCreated(true);

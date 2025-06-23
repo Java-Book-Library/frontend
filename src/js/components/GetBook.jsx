@@ -48,6 +48,8 @@ function GetBook() {
 
   const handleSearch = async () => {
     if (id) {
+      setBook(null);
+      setSearched(false);
       const foundBook = await BookService.getBookById(id);
       setBook(foundBook);
       setSearched(true);
