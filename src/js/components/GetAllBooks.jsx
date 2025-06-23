@@ -1,13 +1,4 @@
-import { useState, useEffect } from 'react'
-import BookService from '../services/BookService'
-
-function AllBooks() {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    BookService.getAllBooks().then(setBooks);
-  }, []);
-
+function AllBooks({ books }) {
   return (
     <>
       <div className="card">

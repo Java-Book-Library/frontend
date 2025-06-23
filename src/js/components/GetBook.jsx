@@ -41,7 +41,7 @@ function ShowBook({ book, setId, onSearch }) {
   )
 }
 
-function GetBook() {
+function GetBook({ onBooksChanged }) {
   const [id, setId] = useState('');
   const [book, setBook] = useState(null);
   const [searched, setSearched] = useState(false);
@@ -57,6 +57,7 @@ function GetBook() {
   };
 
   if (book) {
+    onBooksChanged();
     return <ShowBook book={book} setId={setId} onSearch={handleSearch} />;
   } 
   else if (searched) {

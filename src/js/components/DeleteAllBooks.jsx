@@ -10,6 +10,7 @@ function DeleteAllBooks() {
     setError(null);
     const result = await BookService.deleteAllBooks();
     if (result) {
+      onBooksChanged();
       setDeleted(true);
     } else {
       setError("Failed to delete all books.");

@@ -40,7 +40,7 @@ function ShowBook({ id, setId, onDelete }) {
   )
 }
 
-function DeleteBook() {
+function DeleteBook({ onBooksChanged }) {
   const [id, setId] = useState('');
   const [deleted, setDeleted] = useState(false);
   const [error, setError] = useState(null);
@@ -59,6 +59,7 @@ function DeleteBook() {
   };
 
   if (deleted) {
+    onBooksChanged();
     return <ShowBook id={id} setId={setId} onDelete={handleDelete} />;
   }
   else if (error) {

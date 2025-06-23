@@ -67,7 +67,7 @@ function HideBook({ newBook, setNewBook, onPost }) {
 }
 
 
-function PostBook() {
+function PostBook({ onBooksChanged }) {
   const [newBook, setNewBook] = useState({ title: "", author: "", price: "" });
   const [createdBook, setCreatedBook] = useState(null);
   const [created, setCreated] = useState(false);
@@ -83,9 +83,8 @@ function PostBook() {
   };
 
   if (createdBook) {
-    return (
-      <ShowBook newBook={newBook} createdBook={createdBook} setNewBook={setNewBook} onPost={handlePost} />
-    )
+    onBooksChanged();
+    return <ShowBook newBook={newBook} createdBook={createdBook} setNewBook={setNewBook} onPost={handlePost} />;
   } 
   else if (created) {
     return (
@@ -95,9 +94,7 @@ function PostBook() {
     )
   }
   else {
-    return (
-      <HideBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
-    )
+    return <HideBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />;
   }
 }
 
