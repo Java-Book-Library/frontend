@@ -28,6 +28,26 @@ class BookService {
     }
   }
 
+  static async addBook(book) {
+    const url = "http://localhost:8080/api/books";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  }
+  
 }
 
 export default BookService;
