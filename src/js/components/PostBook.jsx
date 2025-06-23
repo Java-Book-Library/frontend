@@ -41,6 +41,32 @@ function PostBookForm({ newBook, setNewBook, onPost }) {
   )
 }
 
+function ShowBook({ newBook, setNewBook, onPost }) {
+  return (
+    <div className="card">
+      <h2>Create a book:</h2>
+      <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={onPost} />
+
+      <h3>Created book</h3>
+      <ul>
+        <li key={createdBook.id}>
+            {createdBook.id}: {createdBook.title} by {createdBook.author}
+        </li>
+      </ul>
+    </div>
+  )
+}
+
+function HideBook({ newBook, setNewBook, onPost }) {
+  return (
+    <div className="card">
+      <h2>Create a book:</h2>
+      <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={onPost} />
+    </div>
+  )
+}
+
+
 function PostBook() {
   const [newBook, setNewBook] = useState({ title: "", author: "", price: "" });
   const [createdBook, setCreatedBook] = useState(null);
@@ -54,28 +80,11 @@ function PostBook() {
 
   if (createdBook) {
     return (
-      <>
-        <div className="card">
-          <h2>Create a book:</h2>
-          <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
-
-          <h3>Created book</h3>
-          <ul>
-            <li key={createdBook.id}>
-                {createdBook.id}: {createdBook.title} by {createdBook.author}
-            </li>
-          </ul>
-        </div>
-      </>
+      <ShowBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
     )
   } else {
     return (
-      <>
-        <div className="card">
-          <h2>Create a book:</h2>
-          <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
-        </div>
-      </>
+      <HideBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
     )
   }
 }
