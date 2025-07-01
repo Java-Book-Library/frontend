@@ -4,7 +4,6 @@ import BookService from './services/BookService'
 import GetAllBooks from './components/GetAllBooks'
 import GetBook from './components/GetBook'
 import PostBook from './components/PostBook'
-import DeleteBook from './components/DeleteBook'
 import DeleteAllBooks from './components/DeleteAllBooks'
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
       <GetAllBooks books={books} onBooksChanged={refreshBooks} />
       <GetBook onBooksChanged={refreshBooks} />
       <PostBook onBooksChanged={refreshBooks} />
-      <DeleteBook onBooksChanged={refreshBooks} />
       <DeleteAllBooks onBooksChanged={refreshBooks} />
     </>
   )

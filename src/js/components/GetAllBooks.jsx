@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import PatchBook from './PatchBook';
+import DeleteBookButton from './DeleteBook'
 
 function GetAllBooks({ books, onBooksChanged }) {
   const [editingBookId, setEditingBookId] = useState(null);
+
+  const handleDelete = () => {
+    onBooksChanged()
+  }
 
   const handlePatch = () => {
     setEditingBookId(null);
@@ -24,6 +29,7 @@ function GetAllBooks({ books, onBooksChanged }) {
                     <button onClick={() => setEditingBookId(book.id)} >
                       Edit
                     </button>
+                    <DeleteBookButton book={book} onDelete={handleDelete} />
                   </>
                 )}
               </li>
