@@ -1,8 +1,10 @@
+import RegisterUser from './RegisterUser'
 
-function UserSection() {
+function UserSection({ user, setUser }) {
 
   return (
     <>
+      <RegisterUser user={user} setUser={setUser} />
     </>
   )
 }
