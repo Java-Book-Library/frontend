@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import BookService from '../services/BookService'
+import BookService from '../../services/BookService'
 
 function DeleteBookButton({ book, onDelete }) {
   const [deleting, setDeleting] = useState(false);

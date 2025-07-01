@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import BookService from '../services/BookService'
+import BookService from '../../services/BookService'
 
 function DeleteAllBooks({ refreshBooks }) {
   const [deleted, setDeleted] = useState(false);

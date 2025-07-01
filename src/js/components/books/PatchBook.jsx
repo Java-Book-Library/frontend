@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import BookService from '../services/BookService';
+import BookService from '../../services/BookService';
 
 function PatchBookForm({ book, onPatch }) {
   const [newBook, setNewBook] = useState({ title: book.title, author: book.author, price: book.price });

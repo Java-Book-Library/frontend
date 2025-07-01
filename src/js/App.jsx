@@ -1,26 +1,13 @@
-import { useState, useEffect } from 'react'
 import '../css/App.css'
-import BookService from './services/BookService'
-import GetAllBooks from './components/GetAllBooks'
-import GetBook from './components/GetBook'
-import PostBook from './components/PostBook'
-import DeleteAllBooks from './components/DeleteAllBooks'
+import UserSection from './components/users/UserSection'
+import BookSection from './components/books/BookSection'
 
 function App() {
-  const [books, setBooks] = useState([]);
-
-  const refreshBooks = async () => BookService.getAllBooks().then(setBooks);
-
-  useEffect(() => {
-    refreshBooks();
-  }, []);
 
   return (
     <>
-      <GetAllBooks books={books} refreshBooks={refreshBooks} />
-      <GetBook refreshBooks={refreshBooks} />
-      <PostBook refreshBooks={refreshBooks} />
-      <DeleteAllBooks refreshBooks={refreshBooks} />
+      <UserSection />
+      <BookSection />
     </>
   )
 }
