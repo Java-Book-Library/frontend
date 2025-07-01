@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import BookService from '../services/BookService'
+import DisplayBook from './DisplayBook'
 
 function PostBookForm({ newBook, setNewBook, onPost }) {
   return (
@@ -41,33 +42,7 @@ function PostBookForm({ newBook, setNewBook, onPost }) {
   )
 }
 
-function ShowBook({ newBook, createdBook, setNewBook, onPost }) {
-  return (
-    <div className="card">
-      <h2>Create a book:</h2>
-      <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={onPost} />
-
-      <h3>Created book</h3>
-      <ul>
-        <li key={createdBook.id}>
-            {createdBook.id}: {createdBook.title} by {createdBook.author}
-        </li>
-      </ul>
-    </div>
-  )
-}
-
-function HideBook({ newBook, setNewBook, onPost }) {
-  return (
-    <div className="card">
-      <h2>Create a book:</h2>
-      <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={onPost} />
-    </div>
-  )
-}
-
-
-function PostBook({ onBooksChanged }) {
+function PostBook({ refreshBooks }) {
   const [newBook, setNewBook] = useState({ title: "", author: "", price: "" });
   const [createdBook, setCreatedBook] = useState(null);
   const [created, setCreated] = useState(false);
@@ -77,25 +52,40 @@ function PostBook({ onBooksChanged }) {
       setCreatedBook(null);
       setCreated(false);
       const foundBook = await BookService.addBook(newBook);
-      setCreatedBook(foundBook);
+      if (foundBook) {
+        await refreshBooks();
+        setCreatedBook(foundBook);
+      }
       setCreated(true);
     }
   };
 
-  if (createdBook) {
-    onBooksChanged();
-    return <ShowBook newBook={newBook} createdBook={createdBook} setNewBook={setNewBook} onPost={handlePost} />;
-  } 
-  else if (created) {
-    return (
-      <div className="card">
+  const handleBookChanged = async () => {
+    await refreshBooks();
+    setCreatedBook(null);
+    setCreated(false);
+  };
+
+  return (
+    <div className="card">
+      <h2>Create a Book</h2>
+      <PostBookForm newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />
+      {createdBook && (
+        <>
+          <h3>Created Book:</h3>
+          <ul>
+            <DisplayBook
+              book={createdBook}
+              refreshBooks={handleBookChanged}
+            />
+          </ul>
+        </>
+      )}
+      {!createdBook && created && (
         <h3>Not Found</h3>
-      </div>
-    )
-  }
-  else {
-    return <HideBook newBook={newBook} setNewBook={setNewBook} onPost={handlePost} />;
-  }
+      )}
+    </div>
+  )
 }
 
 export default PostBook;

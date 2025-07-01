@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import BookService from '../services/BookService'
+import DisplayBook from './DisplayBook'
 
 function SearchBookForm({ setId, onSearch }) {
   return (
@@ -16,58 +17,47 @@ function SearchBookForm({ setId, onSearch }) {
   )
 }
 
-function HideBook({ setId, onSearch }) {
-  return (
-    <div className="card">
-      <h2>Search a Book</h2>
-      <SearchBookForm setId={setId} onSearch={onSearch} />
-    </div>
-  )
-}
-
-function ShowBook({ book, setId, onSearch }) {
-  if (!book) return null;
-  return (
-    <div className="card">
-      <h2>Search a Book</h2>
-      <SearchBookForm setId={setId} onSearch={onSearch} />
-      <h3>Searched Book:</h3>
-      <ul>
-        <li key={book.id}>
-            {book.id}: {book.title} by {book.author}
-        </li>
-      </ul>
-    </div>
-  )
-}
-
-function GetBook({ onBooksChanged }) {
+function GetBook({ refreshBooks }) {
   const [id, setId] = useState('');
   const [book, setBook] = useState(null);
   const [searched, setSearched] = useState(false);
 
   const handleSearch = async () => {
+    setBook(null);
+    setSearched(false);
     if (id) {
-      setBook(null);
-      setSearched(false);
       const foundBook = await BookService.getBookById(id);
       setBook(foundBook);
       setSearched(true);
     }
   };
 
-  if (book) {
-    onBooksChanged();
-    return <ShowBook book={book} setId={setId} onSearch={handleSearch} />;
-  } 
-  else if (searched) {
-    return (
-      <div className="card">
+  const handleBookChanged = async () => {
+    await refreshBooks();
+    setBook(null);
+    setSearched(false);
+  };
+
+  return (
+    <div className="card">
+      <h2>Search a Book</h2>
+      <SearchBookForm setId={setId} onSearch={handleSearch} />
+      {book && (
+        <>
+          <h3>Searched Book:</h3>
+          <ul>
+            <DisplayBook
+              book={book}
+              refreshBooks={handleBookChanged}
+            />
+          </ul>
+        </>
+      )}
+      {!book && searched && (
         <h3>Not Found</h3>
-      </div>
-    )
-  }
-  return <HideBook setId={setId} onSearch={handleSearch} />;
+      )}
+    </div>
+  )
 }
 
 export default GetBook;

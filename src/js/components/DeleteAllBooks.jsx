@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import BookService from '../services/BookService'
 
-function DeleteAllBooks() {
+function DeleteAllBooks({ refreshBooks }) {
   const [deleted, setDeleted] = useState(false);
   const [error, setError] = useState(null);
 
@@ -10,7 +10,7 @@ function DeleteAllBooks() {
     setError(null);
     const result = await BookService.deleteAllBooks();
     if (result) {
-      onBooksChanged();
+      refreshBooks();
       setDeleted(true);
     } else {
       setError("Failed to delete all books.");

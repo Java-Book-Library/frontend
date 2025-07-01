@@ -17,10 +17,10 @@ function App() {
 
   return (
     <>
-      <GetAllBooks books={books} onBooksChanged={refreshBooks} />
-      <GetBook onBooksChanged={refreshBooks} />
-      <PostBook onBooksChanged={refreshBooks} />
-      <DeleteAllBooks onBooksChanged={refreshBooks} />
+      <GetAllBooks books={books} refreshBooks={refreshBooks} />
+      <GetBook refreshBooks={refreshBooks} />
+      <PostBook refreshBooks={refreshBooks} />
+      <DeleteAllBooks refreshBooks={refreshBooks} />
     </>
   )
 }
