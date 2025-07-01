@@ -47,6 +47,27 @@ class BookService {
       return null;
     }
   }
+
+  static async updateBook(id, book) {
+    const url = "http://localhost:8080/api/books/" + id;
+    console.log(JSON.stringify(book));
+    try {
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+      });
+      if (response.status === 204) {
+        return true;
+      }
+      throw new Error(`Response status: ${response.status}`);
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  }
   
   static async deleteBookById(id) {
     const url = "http://localhost:8080/api/books/" + id;

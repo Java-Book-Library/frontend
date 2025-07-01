@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../css/App.css'
 import BookService from './services/BookService'
-import AllBooks from './components/GetAllBooks'
+import GetAllBooks from './components/GetAllBooks'
 import GetBook from './components/GetBook'
 import PostBook from './components/PostBook'
 import DeleteBook from './components/DeleteBook'
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <AllBooks books={books} />
+      <GetAllBooks books={books} onBooksChanged={refreshBooks} />
       <GetBook onBooksChanged={refreshBooks} />
       <PostBook onBooksChanged={refreshBooks} />
       <DeleteBook onBooksChanged={refreshBooks} />
