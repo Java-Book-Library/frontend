@@ -33,7 +33,7 @@ function RegisterUserForm({ newUser, setNewUser, onRegister }) {
 }
 
 function RegisterUser({ user, setUser }) {
-  const [newUser, setNewUser] = useState({ name: "", password: "" });
+  const [newUser, setNewUser] = useState({ id: "", name: "", password: "" });
   const [error, setError] = useState(null);
 
   const handlePost = async () => {

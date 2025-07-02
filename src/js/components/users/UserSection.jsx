@@ -1,6 +1,7 @@
 import RegisterUser from './RegisterUser'
 import LoginUser from './LoginUser'
 import UserHeader from './UserHeader'
+import UserBookSection from '../user-book/UserBookSection'
 
 function UserSection({ user, setUser }) {
 
@@ -15,6 +16,7 @@ function UserSection({ user, setUser }) {
       {user && (
         <>
           <UserHeader user={user} />
+          <UserBookSection user={user} />
         </>
       )}
     </div>
